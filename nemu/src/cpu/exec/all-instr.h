@@ -41,3 +41,5 @@
 #include"logic/test.h"
 
 #include"con-trans/je.h"
+
+#include"arith/cmp.h"
