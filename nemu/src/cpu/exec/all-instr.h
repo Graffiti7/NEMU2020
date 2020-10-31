@@ -17,10 +17,15 @@
 #include "logic/and.h"
 #include "logic/or.h"
 #include "logic/not.h"
+
 #include "logic/xor.h"
+
 #include "logic/sar.h"
+
 #include "logic/shl.h"
+
 #include "logic/shr.h"
+
 #include "logic/shrd.h"
 
 #include "string/rep.h"
@@ -30,4 +35,7 @@
 #include "special/special.h"
 
 #include"con-trans/call.h"
+
+#include"data-mov/push.h"
+
 
