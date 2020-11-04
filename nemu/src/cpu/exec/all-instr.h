@@ -53,3 +53,5 @@
 #include"arith/sub.h"
 
 #include"string/lods.h"
+
+#include"string/scas.h"
