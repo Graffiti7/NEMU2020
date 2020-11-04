@@ -59,3 +59,5 @@
 #include"con-trans/jne.h"
 
 #include"con-trans/jmp.h"
+
+#include"arith/sbb.h"
