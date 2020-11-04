@@ -57,3 +57,5 @@
 #include"string/scas.h"
 
 #include"con-trans/jne.h"
+
+#include"con-trans/jmp.h"
