@@ -64,3 +64,5 @@
 
 #include"con-trans/jle.h"
 #include"string/movs.h"
+
+#include"string/stos.h"
