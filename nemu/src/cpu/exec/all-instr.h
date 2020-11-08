@@ -71,3 +71,5 @@
 #include"con-trans/jbe.h"
 
 #include"con-trans/jg.h"
+
+#include"con-trans/js.h"
