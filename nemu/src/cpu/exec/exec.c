@@ -69,14 +69,14 @@ make_group(group3_b,
 
 /* 0xf7 */
 make_group(group3_v,
-	test_i2rm_v, inv, inv, inv, 
+	test_i2rm_v,not_rm_v, inv, inv, 
 	inv, inv, inv, inv)
 
 /* 0xfe */
 make_group(group4,
 	inv, inv, inv, inv, 
 	inv, inv, inv, inv)
-	
+
 /*0xff*/
 make_group(group5,
 	inc_rm_v, dec_rm_v, call_rm_v, inv, 
