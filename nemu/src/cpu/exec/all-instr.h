@@ -79,3 +79,19 @@
 #include"con-trans/jge.h"
 
 #include"con-trans/jl.h"
+
+#include"arith/adc.h"
+
+#include"con-trans/jb.h"
+
+#include"con-trans/ja.h"
+
+#include"con-trans/jae.h"
+
+#include"logic/setne.h"
+
+#include"data-mov/movsx.h"
+
+#include"data-mov/movzb.h"
+
+#include"data-mov/movzw.h"
