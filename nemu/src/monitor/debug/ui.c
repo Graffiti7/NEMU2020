@@ -80,13 +80,12 @@ static int cmd_x(char *args) {
 }
 
 static int cmd_p(char *args) {
-	TestCorrect(args == NULL);
-	uint32_t ans;
-	bool flag;
-	ans = expr(args, &flag);
-	TestCorrect(!flag) 
-	else {
-		printf("%d\n", ans);
+	bool success;
+
+	if(args) {
+		uint32_t r = expr(args, &success);
+		if(success) { printf("0x%08x(%d)\n", r, r); }
+		else { printf("Bad expression\n"); }
 	}
 	return 0;
 }
@@ -125,32 +124,26 @@ typedef struct {
 	swaddr_t ret_addr;
 	uint32_t args[4];
 }PartOfStackFrame ;
-static int cmd_bt(char* args){
-	if (args != NULL){
-		printf("Wrong Command!");
-		return 0;
-	}
-	PartOfStackFrame EBP;
-	char name[32];
-	int cnt = 0;
-	EBP.ret_addr = cpu.eip;
-	swaddr_t addr = cpu.ebp;
-	// printf("%d\n",addr);
-	int i;
-	while (addr){
-		GetFunctionAddr(EBP.ret_addr,name);
-		if (name[0] == '\0') break;
-		printf("#%d\t0x%08x\t",cnt++,EBP.ret_addr);
-		printf("%s",name);
-		EBP.prev_ebp = swaddr_read(addr,4);
-		EBP.ret_addr = swaddr_read(addr + 4, 4);
-		printf("(");
-		for (i = 0;i < 4;i ++){
-			EBP.args[i] = swaddr_read(addr + 8 + i * 4, 4);
-			printf("0x%x",EBP.args[i]);
-			if (i == 3) printf(")\n");else printf(", ");
-		}
-		addr = EBP.prev_ebp;
+static int cmd_bt(char *args) {
+	const char* find_fun_name(uint32_t eip);
+	struct {
+		swaddr_t prev_ebp;
+		swaddr_t ret_addr;
+		uint32_t args[4];
+	} sf;
+	uint32_t eip = cpu.eip;
+	uint32_t ebp = cpu.ebp;
+	int i = 0;
+	while (ebp != 0) {
+		sf.args[0] = swaddr_read(ebp + 8, 4);
+		sf.args[1] = swaddr_read(ebp + 12, 4);
+		sf.args[2] = swaddr_read(ebp + 16, 4);
+		sf.args[3] = swaddr_read(ebp + 20, 4);
+
+		printf("#%d 0x%08x in %s (0x%08x 0x%08x 0x%08x 0x%08x)\n", i, eip, find_fun_name(eip), sf.args[0], sf.args[1], sf.args[2], sf.args[3]);
+		i++;
+		eip = swaddr_read(ebp + 4, 4);
+		ebp = swaddr_read(ebp, 4);
 	}
 	return 0;
 }
